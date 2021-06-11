@@ -1,0 +1,27 @@
+import React, { useEffect, useState } from "react";
+import { teachersUrl } from "../../utils/url";
+import axios from "axios";
+
+function Teacher() {
+  const [teacher, setTeacher] = useState([]);
+
+  useEffect(() => {
+OBOBOOO   OA fetchTeachers();
+  }, []);O
+OOOOAOAOAOAO
+  const fetchTeachers = async () => {
+    const response = await axios.get(teachersUrl);
+    console.log(response.data);
+    teacher(response.data);
+  };
+
+  return (
+    <div>
+      {teacher.map((data, index) => {
+        return <h1>{data.tname}</h1>
+      })}
+    </div>
+  );
+}
+
+export default Teacher;
