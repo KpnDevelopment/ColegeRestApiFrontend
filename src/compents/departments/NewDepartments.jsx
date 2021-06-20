@@ -1,28 +1,27 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { teachersUrl } from "../../utils/url";
-import "./NewTeacher.css";
+import { departmentsUrl } from "../../utils/url";
 
-function NewTeacher() {
+function NewDepartments() {
   const [data, SetData] = useState({
-    tname: "",
-    department: "",
+    depname: "",
+    hod: "",
   });
   function handle(e) {
     const newData = { ...data };
     newData[e.target.id] = e.target.value;
     SetData(newData);
 
-    console.log(newData);
+    // console.log(newData);
   }
 
   function submit(e) {
     e.preventDefault();
     axios
-      .post(teachersUrl, {
-        tname: data.tname,
-        department: data.department,
+      .post(departmentsUrl, {
+        depname: data.depname,
+        hod: data.hod,
       })
       .then((res) => {
         // console.log(res.data);
@@ -30,16 +29,16 @@ function NewTeacher() {
       });
   }
   return (
-    <div className="form">
+    <div className="from">
       <Form size="lg" action="" onSubmit={(e) => submit(e)}>
         <Form.Group>
           <Form.Label>Name</Form.Label>
           <Form.Control
             required
             className="input"
-            id="tname"
+            id="depname"
             type="text"
-            value={data.tname}
+            value={data.depname}
             placeholder="Name"
             onChange={(e) => handle(e)}
           />
@@ -48,18 +47,12 @@ function NewTeacher() {
           <Form.Control
             required
             className="input"
-            as="select"
-            id="department"
+            id="hod"
             type="text"
-            value={data.department}
-            placeholder="department"
+            value={data.hod}
+            placeholder="HOD"
             onChange={(e) => handle(e)}
-          >
-            <option>-Select Department-</option>
-            <option>Computer Engineering</option>
-            <option>Electronics Engineering</option>
-            <option>Printing Technology</option>
-          </Form.Control>
+          />
           <Button type="submit">submit</Button>
         </Form.Group>
       </Form>
@@ -67,4 +60,4 @@ function NewTeacher() {
   );
 }
 
-export default NewTeacher;
+export default NewDepartments;

@@ -20,8 +20,8 @@ function Course() {
         <u>Courses</u>
       </h1>
 
-      {course.map((data) => (
-        <div className="course">
+      {course.map((data, index) => (
+        <div key={index} className="course">
           <h54>{data.name}</h54>
           <h>{data.noyear}</h>
         </div>

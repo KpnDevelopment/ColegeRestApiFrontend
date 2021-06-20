@@ -18,7 +18,7 @@ function Departments() {
     <div>
       {/* <h1>{dep}</h1> */}
       {dep.map((data, index) => (
-        <div className="departement">
+        <div key={index} className="departement">
           <h1>{data.depname}</h1>
           <h2>{data.hod}</h2>
         </div>

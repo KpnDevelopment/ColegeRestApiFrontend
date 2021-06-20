@@ -1,57 +1,60 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { teachersUrl } from "../../utils/url";
-import "./NewTeacher.css";
+import { studentsUrl } from "../../utils/url";
 
-function NewTeacher() {
-  const [data, SetData] = useState({
-    tname: "",
+function NewStudent() {
+  const [data, setData] = useState({
+    admNo: "",
+    studentName: "",
     department: "",
+    yearOfAdm: "",
   });
   function handle(e) {
     const newData = { ...data };
     newData[e.target.id] = e.target.value;
-    SetData(newData);
-
+    setData(newData);
     console.log(newData);
   }
-
   function submit(e) {
     e.preventDefault();
     axios
-      .post(teachersUrl, {
-        tname: data.tname,
+      .post(studentsUrl, {
+        admNo: data.admNo,
+        studentName: data.studentName,
         department: data.department,
+        yearOfAdm: data.yearOfAdm,
       })
       .then((res) => {
-        // console.log(res.data);
-        alert("created successfully");
+        console.log(res.data);
+        alert("created Sucessfully");
       });
   }
   return (
-    <div className="form">
-      <Form size="lg" action="" onSubmit={(e) => submit(e)}>
+    <div>
+      <h1>New Course</h1>
+      <Form className="form" onSubmit={(e) => submit(e)}>
         <Form.Group>
-          <Form.Label>Name</Form.Label>
           <Form.Control
-            required
+            placeholder="Admission Number"
             className="input"
-            id="tname"
-            type="text"
-            value={data.tname}
-            placeholder="Name"
+            type="number"
+            id="admNo"
             onChange={(e) => handle(e)}
           />
-
-          <Form.Label>Department</Form.Label>
+          <Form.Control
+            placeholder="Name"
+            className="input"
+            type="text"
+            id="studentName"
+            onChange={(e) => handle(e)}
+          />
           <Form.Control
             required
             className="input"
             as="select"
             id="department"
             type="text"
-            value={data.department}
             placeholder="department"
             onChange={(e) => handle(e)}
           >
@@ -60,11 +63,18 @@ function NewTeacher() {
             <option>Electronics Engineering</option>
             <option>Printing Technology</option>
           </Form.Control>
-          <Button type="submit">submit</Button>
+          <Form.Control
+            required
+            placeholder="Year of Admission"
+            className="input"
+            type="date"
+            id="yearOfAdm"
+            onChange={(e) => handle(e)}
+          />
+          <Button type="submit">Submit</Button>
         </Form.Group>
       </Form>
     </div>
   );
 }
-
-export default NewTeacher;
+export default NewStudent;
