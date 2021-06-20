@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, Card } from "react-bootstrap";
 import { departmentsUrl } from "../../utils/url";
 
 function Departments() {

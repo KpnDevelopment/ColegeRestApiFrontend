@@ -11,14 +11,14 @@ function Teacher() {
 
   const fetchTeachers = async () => {
     const response = await axios.get(teachersUrl);
-    console.log(response.data);
+    // console.log(response.data);
     setTeacher(response.data);
   };
 
   return (
     <div>
       {teacher.map((data, index) => (
-        <div className="data">
+        <div key={index} className="data">
           <h4>{data.tname}</h4>
           <h5>{data.department}</h5>
         </div>
