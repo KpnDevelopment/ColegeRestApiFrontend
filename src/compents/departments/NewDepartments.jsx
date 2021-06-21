@@ -1,13 +1,20 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import { departmentsUrl } from "../../utils/url";
+import { departmentsUrl, courseUrl } from "../../utils/url";
+import { Link } from "react-router-dom";
 
 function NewDepartments() {
   const [data, SetData] = useState({
     depname: "",
     hod: "",
   });
+  const [departmentList, setDepartmentList] = useState([]);
+
+  useEffect(() => {
+    fetchDepartmentList();
+  }, []);
+
   function handle(e) {
     const newData = { ...data };
     newData[e.target.id] = e.target.value;
@@ -15,7 +22,11 @@ function NewDepartments() {
 
     // console.log(newData);
   }
-
+  const fetchDepartmentList = async () => {
+    const response = await axios.get(courseUrl);
+    console.log(response.data);
+    setDepartmentList(response.data);
+  };
   function submit(e) {
     e.preventDefault();
     axios
@@ -35,14 +46,21 @@ function NewDepartments() {
         <Form.Group>
           <Form.Label>Name</Form.Label>
           <Form.Control
+            as="select"
             required
             className="input"
             id="depname"
             type="text"
-            value={data.depname}
             placeholder="Name"
             onChange={(e) => handle(e)}
-          />
+          >
+            <option>--Department--</option>
+            {departmentList.map((data, index) => (
+              <option key={index} value={data.name}>
+                {data.name}
+              </option>
+            ))}
+          </Form.Control>
 
           <Form.Label>Department</Form.Label>
           <Form.Control
@@ -54,6 +72,9 @@ function NewDepartments() {
             placeholder="HOD"
             onChange={(e) => handle(e)}
           />
+          <Link to="/departments">
+            <Button>back</Button>
+          </Link>
           <Button type="submit">submit</Button>
         </Form.Group>
       </Form>

@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import { studentsUrl } from "../../utils/url";
+import { studentsUrl, courseUrl } from "../../utils/url";
+import { Link } from "react-router-dom";
 
 function NewStudent() {
   const [data, setData] = useState({
@@ -10,6 +11,15 @@ function NewStudent() {
     department: "",
     yearOfAdm: "",
   });
+  useEffect(() => {
+    fetchDepartmentList();
+  }, []);
+  const [departmentList, setDepartmentList] = useState([]);
+  const fetchDepartmentList = async () => {
+    const response = await axios.get(courseUrl);
+    console.log(response.data);
+    setDepartmentList(response.data);
+  };
   function handle(e) {
     const newData = { ...data };
     newData[e.target.id] = e.target.value;
@@ -28,7 +38,11 @@ function NewStudent() {
       .then((res) => {
         console.log(res.data);
         alert("created Sucessfully");
+        refreshPage();
       });
+  }
+  function refreshPage() {
+    window.location.reload(false);
   }
   return (
     <div>
@@ -58,10 +72,12 @@ function NewStudent() {
             placeholder="department"
             onChange={(e) => handle(e)}
           >
-            <option>-Select Department-</option>
-            <option>Computer Engineering</option>
-            <option>Electronics Engineering</option>
-            <option>Printing Technology</option>
+            <option>--Department--</option>
+            {departmentList.map((data, index) => (
+              <option key={index} value={data.name}>
+                {data.name}
+              </option>
+            ))}
           </Form.Control>
           <Form.Control
             required
@@ -71,6 +87,9 @@ function NewStudent() {
             id="yearOfAdm"
             onChange={(e) => handle(e)}
           />
+          <Link to="/students">
+            <Button>Back</Button>
+          </Link>
           <Button type="submit">Submit</Button>
         </Form.Group>
       </Form>

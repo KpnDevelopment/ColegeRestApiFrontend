@@ -1,18 +1,26 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { teachersUrl } from "../../utils/url";
+import { teachersUrl, courseUrl } from "../../utils/url";
+import { Link } from "react-router-dom";
 
 function UpdateTeacher() {
-  const [data, setData] = useState({});
-  const [updateData, setUpdata] = useState({
+  const [data, setData] = useState({
     tname: "",
     department: "",
   });
+  const [departmentList, setDepartmentList] = useState([]);
+
   useEffect(() => {
     fetchTeachers();
+    fetchDepartmentList();
   }, []);
 
+  const fetchDepartmentList = async () => {
+    const response = await axios.get(courseUrl);
+    console.log(response.data);
+    setDepartmentList(response.data);
+  };
   const fetchTeachers = async () => {
     const response = await axios.get(teachersUrl);
     // console.log(response.data);
@@ -22,17 +30,17 @@ function UpdateTeacher() {
 
   // handle function
   function handle(e) {
-    const newData = { ...updateData };
+    const newData = { ...data };
     newData[e.target.id] = e.target.value;
-    setUpdata(newData);
+    setData(newData);
     console.log(newData);
   }
   function submit(e) {
     e.preventDefault();
     axios
       .put(`http://localhost:5000/teachers/${data._id}`, {
-        tname: updateData.tname,
-        department: updateData.department,
+        tname: data.tname,
+        department: data.department,
       })
       .then((res) => {
         console.log(res.data);
@@ -53,7 +61,7 @@ function UpdateTeacher() {
             className="input"
             id="tname"
             type="text"
-            defaultValue={data.tname}
+            value={data.tname}
             placeholder="Name"
             onChange={(e) => {
               handle(e);
@@ -67,17 +75,22 @@ function UpdateTeacher() {
             as="select"
             id="department"
             type="text"
-            defaultValue={data.department}
+            value={data.department}
             placeholder="department"
             onChange={(e) => {
               handle(e);
             }}
           >
-            <option>-Select Department-</option>
-            <option>Computer Engineering</option>
-            <option>Electronics Engineering</option>
-            <option>Printing Technology</option>
+            <option>--Department--</option>
+            {departmentList.map((data, index) => (
+              <option key={index} value={data.name}>
+                {data.name}
+              </option>
+            ))}
           </Form.Control>
+          <Link to="/teachers">
+            <Button>Back</Button>
+          </Link>
           <Button type="submit">submit</Button>
         </Form.Group>
       </Form>

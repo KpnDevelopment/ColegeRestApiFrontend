@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, FormControl } from "react-bootstrap";
 import { courseUrl } from "../../utils/url";
 import { Link } from "react-router-dom";
 
@@ -37,7 +37,7 @@ function NewCourse() {
       <h1>new Course</h1>
       <Form size="lg" onSubmit={(e) => submit(e)}>
         <Form.Group>
-          <Form.Control
+          <FormControl
             id="name"
             className="input"
             required
@@ -56,9 +56,9 @@ function NewCourse() {
             onChange={(e) => handle(e)}
           >
             <option>--year--</option>
-            <option>1 year</option>
-            <option>2 year</option>
-            <option>3 year</option>
+            <option value="1 years">1 years</option>
+            <option value="2 years">2 years</option>
+            <option value="3 years">3 years</option>
           </Form.Control>
           <Link to="/courses">
             <Button>Back</Button>

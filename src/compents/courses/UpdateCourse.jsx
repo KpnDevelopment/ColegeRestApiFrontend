@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, FormControl } from "react-bootstrap";
 import { Link } from "react-router-dom";
 function UpdateCourse(props) {
-  const [data, setData] = useState({});
-  const [updateData, setUpdateData] = useState({
+  const [data, setData] = useState({
     name: "",
     noyear: "",
   });
+
   useEffect(() => {
     // console.log(props.match.params.id);
     fetchCourse();
@@ -23,17 +23,17 @@ function UpdateCourse(props) {
   // handle
 
   function handle(e) {
-    const newData = { ...updateData };
+    const newData = { ...data };
     newData[e.target.id] = e.target.value;
-    setUpdateData(newData);
+    setData(newData);
     console.log(newData);
   }
   function submit(e) {
     e.preventDefault();
     axios
       .put(`http://localhost:5000/courses/${props.match.params.id}`, {
-        name: updateData.name,
-        noyear: updateData.noyear,
+        name: data.name,
+        noyear: data.noyear,
       })
       .then((result) => {
         console.log(result);
@@ -47,30 +47,32 @@ function UpdateCourse(props) {
     <div>
       <form size="lg" onSubmit={(e) => submit(e)}>
         <Form.Group>
-          <Form.Control
-            id="name"
+          <FormControl
             className="input"
             required
-            defaultValue={data.name}
+            id="name"
+            // defaultValue={data.name}
+            value={data.name}
             type="text"
             placeholder="Course Name"
             onChange={(e) => handle(e)}
           />
-          <Form.Control
+          <FormControl
             required
             as="select"
             id="noyear"
-            className="input"
-            placeholder="year"
-            type="text"
-            defaultValue={data.noyear}
+            // className="input"
+            // placeholder="year"
+            // type="text"
+            value={data.noyear}
             onChange={(e) => handle(e)}
           >
+            {/* {console.log(data.noyear)} */}
             <option>--year--</option>
-            <option>1 year</option>
-            <option>2 year</option>
-            <option>3 year</option>
-          </Form.Control>
+            <option value="1 years">1 years</option>
+            <option value="2 years">2 years</option>
+            <option value="3 years">3 years</option>
+          </FormControl>
           <Link to="/courses">
             <Button>Back</Button>
           </Link>
