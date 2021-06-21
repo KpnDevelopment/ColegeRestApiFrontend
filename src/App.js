@@ -11,8 +11,7 @@ import NewStudent from "./compents/student/NewStudent";
 function App() {
   return (
     <div className="App">
-      <Student />
-      <NewStudent />
+      <Teacher />
     </div>
   );
 }

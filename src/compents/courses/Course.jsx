@@ -5,6 +5,7 @@ import { courseUrl } from "../../utils/url";
 function Course() {
   const [course, setCourse] = useState([]);
 
+  
   useEffect(() => {
     fetchCourse();
   }, []);
