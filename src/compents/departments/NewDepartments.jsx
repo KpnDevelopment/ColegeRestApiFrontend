@@ -30,6 +30,7 @@ function NewDepartments() {
   }
   return (
     <div className="from">
+      <h1>new Departments</h1>
       <Form size="lg" action="" onSubmit={(e) => submit(e)}>
         <Form.Group>
           <Form.Label>Name</Form.Label>

@@ -35,6 +35,7 @@ function NewTeacher() {
   return (
     <div className="form">
       <Form size="lg" action="" onSubmit={(e) => submit(e)}>
+        <h1>New Teacher</h1>
         <Form.Group>
           <Form.Label>Name</Form.Label>
           <Form.Control

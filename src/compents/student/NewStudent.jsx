@@ -32,7 +32,7 @@ function NewStudent() {
   }
   return (
     <div>
-      <h1>New Course</h1>
+      <h1>New Students</h1>
       <Form className="form" onSubmit={(e) => submit(e)}>
         <Form.Group>
           <Form.Control

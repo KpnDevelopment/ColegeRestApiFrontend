@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { courseUrl } from "../../utils/url";
-import { Button } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function Course() {
   const [course, setCourse] = useState([]);
@@ -15,33 +16,61 @@ function Course() {
     // console.log(response.data);
     setCourse(response.data);
   };
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   return (
     <div>
       <h1>
         <u>Courses</u>
       </h1>
 
-      {course.map((data, index) => (
-        <div key={index} className="course">
-          <h4>{data.name}</h4>
-          <h4>{data.noyear}</h4>
-          <Button
-            onClick={() => {
-              axios
-                .delete(`http://localhost:5000/courses/${data._id}`)
-                .then((res) => {
-                  // console.log(res);
-                  alert("deleted");
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
-            }}
-          >
-            Delete
-          </Button>
-        </div>
-      ))}
+      <div className="course">
+        <Table striped bordered hover>
+          <thead>
+            <th>Name</th>
+            <th>Number Of Years</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th style={{ width: "2rem" }}>
+              <Link to="/courses/new">
+                <Button variant="success">add</Button>
+              </Link>
+            </th>
+          </thead>
+          <tbody>
+            {course.map((data, index) => (
+              <tr key={index}>
+                <td>{data.name}</td>
+                <td>{data.noyear}</td>
+                <td>
+                  <Button variant="primary">Edit</Button>
+                </td>
+                <td>
+                  <Button
+                    variant="danger"
+                    onClick={() => {
+                      axios
+                        .delete(`http://localhost:5000/courses/${data._id}`)
+                        .then((res) => {
+                          // console.log(res);
+                          alert("deleted");
+                          refreshPage();
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </div>
   );
 }

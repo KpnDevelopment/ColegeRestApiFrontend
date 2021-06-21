@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { courseUrl } from "../../utils/url";
+import { Link } from "react-router-dom";
 
 function NewCourse() {
   const [data, setData] = useState({
@@ -20,7 +21,6 @@ function NewCourse() {
   //   submit
 
   function submit(e) {
-    e.preventDefault();
     axios
       .post(courseUrl, {
         name: data.name,
@@ -29,10 +29,12 @@ function NewCourse() {
       .then((res) => {
         console.log(res.data);
         alert("created successfully");
+        e.preventDefault();
       });
   }
   return (
     <div className="form" onSubmit={(e) => submit(e)}>
+      <h1>new Course</h1>
       <Form size="lg">
         <Form.Group>
           <Form.Control
@@ -58,6 +60,9 @@ function NewCourse() {
             <option>2 year</option>
             <option>3 year</option>
           </Form.Control>
+          <Link to="/courses">
+            <Button>Back</Button>
+          </Link>
           <Button type="submit">Submit</Button>
         </Form.Group>
       </Form>
