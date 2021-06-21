@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { departmentsUrl } from "../../utils/url";
 
 function Departments() {
@@ -11,7 +12,7 @@ function Departments() {
 
   const fetchdepartments = async () => {
     const response = await axios.get(departmentsUrl);
-    console.log(response.data);
+    // console.log(response.data);
     setdep(response.data);
   };
   return (
@@ -21,6 +22,21 @@ function Departments() {
         <div key={index} className="departement">
           <h1>{data.depname}</h1>
           <h2>{data.hod}</h2>
+          <Button
+            onClick={() => {
+              axios
+                .delete(`http://localhost:5000/departments/${data._id}`)
+                .then((res) => {
+                  // console.log(res);
+                  alert("delete");
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }}
+          >
+            Delete
+          </Button>
         </div>
       ))}
     </div>

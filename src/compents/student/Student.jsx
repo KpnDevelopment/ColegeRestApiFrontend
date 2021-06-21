@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { studentsUrl } from "../../utils/url";
+import { Button } from "react-bootstrap";
 
 function Student() {
   const [student, setStudent] = useState([]);
@@ -10,7 +11,7 @@ function Student() {
 
   const fetchStudent = async () => {
     const response = await axios.get(studentsUrl);
-    console.log(response.data);
+    // console.log(response.data);
     setStudent(response.data);
   };
   return (
@@ -22,6 +23,21 @@ function Student() {
           <h3>{data.studentName}</h3>
           <h3>{data.department}</h3>
           <h3>{data.yearOfAdm}</h3>
+          <Button
+            onClick={() => {
+              axios
+                .delete(`http://localhost:5000/students/${data._id}`)
+                .then((res) => {
+                  // console.log(res);
+                  alert("deleted");
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }}
+          >
+            Delete
+          </Button>
         </div>
       ))}
     </div>

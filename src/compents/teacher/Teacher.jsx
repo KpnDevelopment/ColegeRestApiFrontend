@@ -12,15 +12,17 @@ function Teacher() {
 
   const fetchTeachers = async () => {
     const response = await axios.get(teachersUrl);
-    console.log(response.data);
-    console.log(response.data[0]._id);
+    // console.log(response.data);
+    // console.log(response.data[0]._id);
     setTeacher(response.data);
   };
 
-  function updateTeacher(id) {
+  // ? updateTeacher() direct patch function
+
+  /* function updateTeacher(id) {
     axios({
       method: "patch",
-      url: "http://localhost:5000/teachers/",
+      url: "http://localhost:5000/teachers/60cb6d73a2a30b38a2bcb9f5",
       data: {
         tname: "updatedTeacher",
         department: "updateddepartment",
@@ -28,7 +30,8 @@ function Teacher() {
     }).then((data) => {
       console.log(data);
     });
-  }
+  } */
+  // ? deleteStudent() function used for direct delete
   // function deleteStudnet(id) {
   //   axios.delete("http://localhost:5000/teachers/60cb6d73a2a30b38a2bcb9f5");
   // }
@@ -45,6 +48,9 @@ function Teacher() {
                 .then(() => {
                   // console.log(res);
                   alert("deleted");
+                })
+                .catch((err) => {
+                  console.log(err);
                 });
             }}
           >
@@ -52,7 +58,7 @@ function Teacher() {
           </Button>
         </div>
       ))}
-      <Button>patch</Button>
+      {/* <Button>patch</Button> */}
     </div>
   );
 }

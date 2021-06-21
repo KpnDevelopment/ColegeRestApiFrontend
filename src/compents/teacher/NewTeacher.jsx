@@ -5,14 +5,14 @@ import { teachersUrl } from "../../utils/url";
 import "./NewTeacher.css";
 
 function NewTeacher() {
-  const [data, SetData] = useState({
+  const [data, setData] = useState({
     tname: "",
     department: "",
   });
   function handle(e) {
     const newData = { ...data };
     newData[e.target.id] = e.target.value;
-    SetData(newData);
+    setData(newData);
 
     console.log(newData);
   }
@@ -27,6 +27,9 @@ function NewTeacher() {
       .then((res) => {
         // console.log(res.data);
         alert("created successfully");
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
   return (
