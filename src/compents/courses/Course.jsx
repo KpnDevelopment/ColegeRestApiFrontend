@@ -45,7 +45,9 @@ function Course() {
                 <td>{data.name}</td>
                 <td>{data.noyear}</td>
                 <td>
-                  <Button variant="primary">Edit</Button>
+                  <Link to={`/courses/${data._id}`}>
+                    <Button variant="primary">Edit</Button>
+                  </Link>
                 </td>
                 <td>
                   <Button

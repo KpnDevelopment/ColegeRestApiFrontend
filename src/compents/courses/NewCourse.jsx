@@ -21,6 +21,7 @@ function NewCourse() {
   //   submit
 
   function submit(e) {
+    e.preventDefault();
     axios
       .post(courseUrl, {
         name: data.name,
@@ -29,13 +30,12 @@ function NewCourse() {
       .then((res) => {
         console.log(res.data);
         alert("created successfully");
-        e.preventDefault();
       });
   }
   return (
-    <div className="form" onSubmit={(e) => submit(e)}>
+    <div className="form">
       <h1>new Course</h1>
-      <Form size="lg">
+      <Form size="lg" onSubmit={(e) => submit(e)}>
         <Form.Group>
           <Form.Control
             id="name"
