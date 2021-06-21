@@ -12,14 +12,15 @@ function Teacher() {
 
   const fetchTeachers = async () => {
     const response = await axios.get(teachersUrl);
-    // console.log(response.data);
+    console.log(response.data);
+    console.log(response.data[0]._id);
     setTeacher(response.data);
   };
 
   function updateTeacher(id) {
     axios({
       method: "patch",
-      url: "http://localhost:5000/teachers/60cb6d73a2a30b38a2bcb9f5",
+      url: "http://localhost:5000/teachers/",
       data: {
         tname: "updatedTeacher",
         department: "updateddepartment",
@@ -28,19 +29,30 @@ function Teacher() {
       console.log(data);
     });
   }
-  function deleteStudnet(id) {
-    axios.delete("http://localhost:5000/teachers/60cb6d73a2a30b38a2bcb9f5");
-  }
+  // function deleteStudnet(id) {
+  //   axios.delete("http://localhost:5000/teachers/60cb6d73a2a30b38a2bcb9f5");
+  // }
   return (
     <div>
       {teacher.map((data, index) => (
         <div key={index} className="data">
           <h4>{data.tname}</h4>
           <h5>{data.department}</h5>
+          <Button
+            onClick={() => {
+              axios
+                .delete(`http://localhost:5000/teachers/${data._id}`)
+                .then(() => {
+                  // console.log(res);
+                  alert("deleted");
+                });
+            }}
+          >
+            Delete
+          </Button>
         </div>
       ))}
-      <Button onClick={updateTeacher}>patch</Button>
-      <Button onClick={deleteStudnet}>Delete</Button>
+      <Button>patch</Button>
     </div>
   );
 }
