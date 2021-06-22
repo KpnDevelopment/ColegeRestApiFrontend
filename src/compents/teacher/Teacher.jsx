@@ -43,6 +43,7 @@ function Teacher() {
     <div>
       <Table striped bordered hover>
         <thead>
+          <th>SlNo</th>
           <th>Name</th>
           <th>department</th>
           <th>Edit</th>
@@ -56,6 +57,7 @@ function Teacher() {
         <tbody>
           {teacher.map((data, index) => (
             <tr key={index}>
+              <td>{index + 1}</td>
               <td>{data.tname}</td>
               <td>{data.department}</td>
               <td>

@@ -29,6 +29,7 @@ function Course() {
       <div className="course">
         <Table striped bordered hover>
           <thead>
+            <th>SlNo</th>
             <th>Name</th>
             <th>Number Of Years</th>
             <th>Edit</th>
@@ -42,6 +43,7 @@ function Course() {
           <tbody>
             {course.map((data, index) => (
               <tr key={index}>
+                <td>{index + 1}</td>
                 <td>{data.name}</td>
                 <td>{data.noyear}</td>
                 <td>

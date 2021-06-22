@@ -11,10 +11,11 @@ function NewStudent() {
     department: "",
     yearOfAdm: "",
   });
+  const [departmentList, setDepartmentList] = useState([]);
   useEffect(() => {
     fetchDepartmentList();
   }, []);
-  const [departmentList, setDepartmentList] = useState([]);
+  
   const fetchDepartmentList = async () => {
     const response = await axios.get(courseUrl);
     console.log(response.data);

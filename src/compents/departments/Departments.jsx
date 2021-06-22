@@ -42,6 +42,7 @@ function Departments() {
           </Button> */}
       <Table striped bordered hover>
         <thead>
+          <th>SlNo</th>
           <th>Department Name</th>
           <th>HOD</th>
           <th>Edit</th>
@@ -55,6 +56,7 @@ function Departments() {
         <tbody>
           {dep.map((data, index) => (
             <tr key={index}>
+              <td>{index + 1}</td>
               <td>{data.depname}</td>
               <td>{data.hod}</td>
               <td>
