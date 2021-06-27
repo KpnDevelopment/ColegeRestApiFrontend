@@ -26,7 +26,7 @@ function Teacher() {
   /* function updateTeacher(id) {
     axios({
       method: "patch",
-      url: "http://localhost:5000/teachers/60cb6d73a2a30b38a2bcb9f5",
+      url: "http://localhost:5001/teachers/60cb6d73a2a30b38a2bcb9f5",
       data: {
         tname: "updatedTeacher",
         department: "updateddepartment",
@@ -37,7 +37,7 @@ function Teacher() {
   } */
   // ? deleteStudent() function used for direct delete
   // function deleteStudnet(id) {
-  //   axios.delete("http://localhost:5000/teachers/60cb6d73a2a30b38a2bcb9f5");
+  //   axios.delete("http://localhost:5001/teachers/60cb6d73a2a30b38a2bcb9f5");
   // }
   return (
     <div>
@@ -70,7 +70,7 @@ function Teacher() {
                   variant="danger"
                   onClick={() => {
                     axios
-                      .delete(`http://localhost:5000/teachers/${data._id}`)
+                      .delete(`http://localhost:5001/teachers/${data._id}`)
                       .then(() => {
                         // console.log(res);
                         alert("deleted");

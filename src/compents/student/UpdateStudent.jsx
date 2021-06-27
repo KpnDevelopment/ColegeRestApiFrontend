@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { courseUrl } from "../../utils/url";
 
@@ -10,6 +10,14 @@ function UpdateStudent(props) {
     studentName: "",
     department: "",
     yearOfAdm: "",
+    dob: "",
+    sslcRegNo: "",
+    gender: "",
+    fatherName: "",
+    address: "",
+    pincode: "",
+    mobile: "",
+    email: "",
   });
   const [departmentList, setDepartmentList] = useState([]);
   useEffect(() => {
@@ -20,7 +28,7 @@ function UpdateStudent(props) {
   // fetch the Students
   const fetchStudent = async () => {
     const response = await axios.get(
-      `http://localhost:5000/students/${props.match.params.id}`
+      `http://localhost:5001/students/${props.match.params.id}`
     );
     console.log(response.data);
     setData(response.data);
@@ -43,11 +51,19 @@ function UpdateStudent(props) {
   function submit(e) {
     e.preventDefault();
     axios
-      .put(`http://localhost:5000/students/${props.match.params.id}`, {
+      .put(`http://localhost:5001/students/${props.match.params.id}`, {
         admNo: data.admNo,
         studentName: data.studentName,
         department: data.department,
         yearOfAdm: data.yearOfAdm,
+        dob: data.dob,
+        sslcRegNo: data.sslcRegNo,
+        gender: data.gender,
+        fatherName: data.fatherName,
+        address: data.address,
+        pincode: data.pincode,
+        mobile: data.mobile,
+        email: data.email,
       })
       .then((result) => {
         console.log(result);
@@ -87,7 +103,9 @@ function UpdateStudent(props) {
             type="text"
             value={data.department}
             placeholder="department"
-            onChange={(e) => handle(e)}
+            onChange={(e) => {
+              handle(e);
+            }}
           >
             <option>--Department--</option>
             {departmentList.map((data, index) => (
@@ -103,6 +121,90 @@ function UpdateStudent(props) {
             type="date"
             id="yearOfAdm"
             value={data.yearOfAdm}
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="Date Of Birth"
+            className="input"
+            type="date"
+            id="dob"
+            value={data.dob}
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="SSLC RegNo"
+            className="input"
+            type="number"
+            id="sslcRegNo"
+            value={data.sslcRegNo}
+            onChange={(e) => handle(e)}
+          />
+          <Form.Group as={Row}>
+            <Form.Label as="legend">Gender</Form.Label>
+            <Row style={{ display: "flex", flexDirection: "row" }}>
+              <Form.Check
+                type="radio"
+                label="Male"
+                value="Male"
+                name="formHorizontalRadios"
+                id="gender"
+                onChange={(e) => handle(e)}
+              />
+              <Form.Check
+                type="radio"
+                label="Female"
+                name="formHorizontalRadios"
+                id="gender"
+                onChange={(e) => handle(e)}
+              />
+            </Row>
+          </Form.Group>
+
+          <Form.Control
+            required
+            placeholder="Father's Name"
+            className="input"
+            type="input"
+            id="fatherName"
+            value={data.fatherName}
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="Address"
+            className="input"
+            type="input"
+            id="address"
+            value={data.address}
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="Pincode"
+            className="input"
+            type="number"
+            id="pincode"
+            value={data.pincode}
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="Mobile No"
+            className="input"
+            type="number"
+            id="mobile"
+            value={data.mobile}
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="Email"
+            className="input"
+            type="email"
+            id="email"
+            value={data.email}
             onChange={(e) => handle(e)}
           />
           <Link to="/students">

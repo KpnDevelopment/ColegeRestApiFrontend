@@ -28,7 +28,7 @@ function Departments() {
           <Button
             onClick={() => {
               axios
-                .delete(`http://localhost:5000/departments/${data._id}`)
+                .delete(`http://localhost:5001/departments/${data._id}`)
                 .then((res) => {
                   // console.log(res);
                   alert("delete");
@@ -69,7 +69,7 @@ function Departments() {
                   variant="danger"
                   onClick={() => {
                     axios
-                      .delete(`http://localhost:5000/departments/${data._id}`)
+                      .delete(`http://localhost:5001/departments/${data._id}`)
                       .then((res) => {
                         // console.log(res);
                         alert("deleted");

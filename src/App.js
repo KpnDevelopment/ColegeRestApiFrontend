@@ -18,6 +18,8 @@ import UpdateStudent from "./compents/student/UpdateStudent";
 
 import Home from "./compents/home/Home";
 import NavigationBar from "./compents/navigationbar/NavigationBar";
+import login from "./compents/login/Login";
+
 
 function App() {
   return (
@@ -27,6 +29,10 @@ function App() {
         <div className="components">
           <Switch>
             <Route path="/" exact component={Home} />
+
+            {/* login */}
+
+            <Route path="/login" exact component={login} />
 
             {/* course Routes */}
 

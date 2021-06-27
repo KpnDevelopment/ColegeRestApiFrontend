@@ -38,7 +38,7 @@ function UpdateTeacher() {
   function submit(e) {
     e.preventDefault();
     axios
-      .put(`http://localhost:5000/teachers/${data._id}`, {
+      .put(`http://localhost:5001/teachers/${data._id}`, {
         tname: data.tname,
         department: data.department,
       })

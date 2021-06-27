@@ -15,7 +15,7 @@ function UpdateCourse(props) {
 
   const fetchCourse = async () => {
     const response = await axios.get(
-      `http://localhost:5000/courses/${props.match.params.id}`
+      `http://localhost:5001/courses/${props.match.params.id}`
     );
     console.log(response.data);
     setData(response.data);
@@ -31,7 +31,7 @@ function UpdateCourse(props) {
   function submit(e) {
     e.preventDefault();
     axios
-      .put(`http://localhost:5000/courses/${props.match.params.id}`, {
+      .put(`http://localhost:5001/courses/${props.match.params.id}`, {
         name: data.name,
         noyear: data.noyear,
       })

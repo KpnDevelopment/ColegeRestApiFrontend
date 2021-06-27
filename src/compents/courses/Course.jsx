@@ -40,6 +40,7 @@ function Course() {
               </Link>
             </th>
           </thead>
+
           <tbody>
             {course.map((data, index) => (
               <tr key={index}>
@@ -56,7 +57,7 @@ function Course() {
                     variant="danger"
                     onClick={() => {
                       axios
-                        .delete(`http://localhost:5000/courses/${data._id}`)
+                        .delete(`http://localhost:5001/courses/${data._id}`)
                         .then((res) => {
                           // console.log(res);
                           alert("deleted");

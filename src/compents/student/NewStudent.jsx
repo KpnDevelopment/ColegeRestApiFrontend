@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { studentsUrl, courseUrl } from "../../utils/url";
 import { Link } from "react-router-dom";
 
@@ -10,12 +10,20 @@ function NewStudent() {
     studentName: "",
     department: "",
     yearOfAdm: "",
+    dob: "",
+    sslcRegNo: "",
+    gender: "",
+    fatherName: "",
+    address: "",
+    pincode: "",
+    mobile: "",
+    email: "",
   });
   const [departmentList, setDepartmentList] = useState([]);
   useEffect(() => {
     fetchDepartmentList();
   }, []);
-  
+
   const fetchDepartmentList = async () => {
     const response = await axios.get(courseUrl);
     console.log(response.data);
@@ -35,6 +43,14 @@ function NewStudent() {
         studentName: data.studentName,
         department: data.department,
         yearOfAdm: data.yearOfAdm,
+        dob: data.dob,
+        sslcRegNo: data.sslcRegNo,
+        gender: data.gender,
+        fatherName: data.fatherName,
+        address: data.address,
+        pincode: data.pincode,
+        mobile: data.mobile,
+        email: data.email,
       })
       .then((res) => {
         console.log(res.data);
@@ -86,6 +102,84 @@ function NewStudent() {
             className="input"
             type="date"
             id="yearOfAdm"
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="Date Of Birth"
+            className="input"
+            type="date"
+            id="dob"
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="SSLC RegNo"
+            className="input"
+            type="number"
+            id="sslcRegNo"
+            onChange={(e) => handle(e)}
+          />
+          <Form.Group as={Row}>
+            <Form.Label as="legend">Gender</Form.Label>
+            <Row style={{ display: "flex", flexDirection: "row" }}>
+              <Form.Check
+                type="radio"
+                label="Male"
+                value="Male"
+                name="formHorizontalRadios"
+                id="gender"
+                onChange={(e) => handle(e)}
+              />
+              <Form.Check
+                type="radio"
+                label="Female"
+                name="formHorizontalRadios"
+                id="gender"
+                value="Female"
+                onChange={(e) => handle(e)}
+              />
+            </Row>
+          </Form.Group>
+
+          <Form.Control
+            required
+            placeholder="Father's Name"
+            className="input"
+            type="input"
+            id="fatherName"
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="Address"
+            className="input"
+            type="input"
+            id="address"
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="Pincode"
+            className="input"
+            type="number"
+            id="pincode"
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="Mobile No"
+            className="input"
+            type="number"
+            id="mobile"
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="Email"
+            className="input"
+            type="email"
+            id="email"
             onChange={(e) => handle(e)}
           />
           <Link to="/students">

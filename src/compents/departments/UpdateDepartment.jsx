@@ -17,7 +17,7 @@ function UpdateDepartment(props) {
   }, []);
   const fetchCourse = async () => {
     const response = await axios.get(
-      `http://localhost:5000/departments/${props.match.params.id}`
+      `http://localhost:5001/departments/${props.match.params.id}`
     );
     console.log(response.data);
     setData(response.data);
@@ -41,7 +41,7 @@ function UpdateDepartment(props) {
   function submit(e) {
     e.preventDefault();
     axios
-      .put(`http://localhost:5000/departments/${props.match.params.id}`, {
+      .put(`http://localhost:5001/departments/${props.match.params.id}`, {
         depname: data.depname,
         hod: data.hod,
       })
