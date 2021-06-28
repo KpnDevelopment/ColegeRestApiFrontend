@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { studentsUrl, courseUrl } from "../../utils/url";
+import { RadioGroup, RadioButton } from "react-radio-buttons";
 import { Link } from "react-router-dom";
 
 function NewStudent() {
@@ -19,6 +20,18 @@ function NewStudent() {
     mobile: "",
     email: "",
   });
+
+  const radioValue = [
+    {
+      value: "Female",
+    },
+    {
+      value: "Male",
+    },
+    {
+      value: "Other",
+    },
+  ];
   const [departmentList, setDepartmentList] = useState([]);
   useEffect(() => {
     fetchDepartmentList();
@@ -120,28 +133,25 @@ function NewStudent() {
             id="sslcRegNo"
             onChange={(e) => handle(e)}
           />
-          <Form.Group as={Row}>
-            <Form.Label as="legend">Gender</Form.Label>
-            <Row style={{ display: "flex", flexDirection: "row" }}>
-              <Form.Check
-                type="radio"
-                label="Male"
-                value="Male"
-                name="formHorizontalRadios"
-                id="gender"
-                onChange={(e) => handle(e)}
-              />
-              <Form.Check
-                type="radio"
-                label="Female"
-                name="formHorizontalRadios"
-                id="gender"
-                value="Female"
-                onChange={(e) => handle(e)}
-              />
-            </Row>
-          </Form.Group>
-
+          <Form.Control
+            required
+            className="input"
+            as="select"
+            id="gender"
+            type="text"
+            value={data.gender}
+            placeholder="gender"
+            onChange={(e) => {
+              handle(e);
+            }}
+          >
+            <option>--Gender--</option>
+            {radioValue.map((data, index) => (
+              <option key={index} value={data.value}>
+                {data.value}
+              </option>
+            ))}
+          </Form.Control>
           <Form.Control
             required
             placeholder="Father's Name"

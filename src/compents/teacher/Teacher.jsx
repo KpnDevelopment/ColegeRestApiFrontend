@@ -46,6 +46,14 @@ function Teacher() {
           <th>SlNo</th>
           <th>Name</th>
           <th>department</th>
+          <th>Year of Join</th>
+          <th>DOB</th>
+          <th>SSLC RegNo</th>
+          <th>Gender</th>
+          <th>Address</th>
+          <th>Pincode</th>
+          <th>Mobile</th>
+          <th>Email</th>
           <th>Edit</th>
           <th>Delete</th>
           <th style={{ width: "2rem" }}>
@@ -60,6 +68,14 @@ function Teacher() {
               <td>{index + 1}</td>
               <td>{data.tname}</td>
               <td>{data.department}</td>
+              <td>{data.yearOfJoin}</td>
+              <td>{data.dob}</td>
+              <td>{data.sslcRegNo}</td>
+              <td>{data.gender}</td>
+              <td>{data.address}</td>
+              <td>{data.pincode}</td>
+              <td>{data.mobile}</td>
+              <td>{data.email}</td>
               <td>
                 <Link to={`/teachers/${data._id}`}>
                   <Button variant="primary">Edit</Button>

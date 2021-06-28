@@ -32,6 +32,8 @@ function Course() {
             <th>SlNo</th>
             <th>Name</th>
             <th>Number Of Years</th>
+            <th>Total Paper</th>
+            <th>Description</th>
             <th>Edit</th>
             <th>Delete</th>
             <th style={{ width: "2rem" }}>
@@ -46,7 +48,9 @@ function Course() {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{data.name}</td>
-                <td>{data.noyear}</td>
+                <td>{data.noYear}</td>
+                <td>{data.totalPaper}</td>
+                <td>{data.description}</td>
                 <td>
                   <Link to={`/courses/${data._id}`}>
                     <Button variant="primary">Edit</Button>

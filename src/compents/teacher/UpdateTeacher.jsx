@@ -4,10 +4,19 @@ import { Button, Form } from "react-bootstrap";
 import { teachersUrl, courseUrl } from "../../utils/url";
 import { Link } from "react-router-dom";
 
-function UpdateTeacher() {
+function UpdateTeacher(props) {
   const [data, setData] = useState({
     tname: "",
     department: "",
+    yearOfJoin: "",
+    dob: "",
+    sslcRegNo: "",
+    gender: "",
+    fatherName: "",
+    address: "",
+    pincode: "",
+    mobile: "",
+    email: "",
   });
   const [departmentList, setDepartmentList] = useState([]);
 
@@ -22,10 +31,12 @@ function UpdateTeacher() {
     setDepartmentList(response.data);
   };
   const fetchTeachers = async () => {
-    const response = await axios.get(teachersUrl);
+    const response = await axios.get(
+      `http://localhost:5001/teachers/${props.match.params.id}`
+    );
     // console.log(response.data);
-    console.log(response.data[1]);
-    setData(response.data[1]);
+    console.log(response.data);
+    setData(response.data);
   };
 
   // handle function
@@ -35,12 +46,32 @@ function UpdateTeacher() {
     setData(newData);
     console.log(newData);
   }
+  const radioValue = [
+    {
+      value: "Female",
+    },
+    {
+      value: "Male",
+    },
+    {
+      value: "Other",
+    },
+  ];
   function submit(e) {
     e.preventDefault();
     axios
       .put(`http://localhost:5001/teachers/${data._id}`, {
         tname: data.tname,
         department: data.department,
+        yearOfJoin: data.yearOfJoin,
+        dob: data.dob,
+        sslcRegNo: data.sslcRegNo,
+        gender: data.gender,
+        fatherName: data.fatherName,
+        address: data.address,
+        pincode: data.pincode,
+        mobile: data.mobile,
+        email: data.email,
       })
       .then((res) => {
         console.log(res.data);
@@ -68,7 +99,7 @@ function UpdateTeacher() {
             }}
           />
 
-          <Form.Label>Department</Form.Label>
+          {/* <Form.Label>Department</Form.Label> */}
           <Form.Control
             required
             className="input"
@@ -82,12 +113,95 @@ function UpdateTeacher() {
             }}
           >
             <option>--Department--</option>
-            {departmentList.map((data, index) => (
-              <option key={index} value={data.name}>
-                {data.name}
+            {departmentList.map((dep, index) => (
+              <option key={index} value={dep.name}>
+                {dep.name}
               </option>
             ))}
           </Form.Control>
+          <Form.Control
+            required
+            placeholder="Year of Join"
+            className="input"
+            type="date"
+            id="yearOfJoin"
+            value={data.yearOfJoin}
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="Date Of Birth"
+            className="input"
+            type="date"
+            id="dob"
+            value={data.dob}
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="SSLC RegNo"
+            className="input"
+            type="number"
+            id="sslcRegNo"
+            value={data.sslcRegNo}
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            className="input"
+            as="select"
+            id="gender"
+            type="text"
+            value={data.gender}
+            placeholder="gender"
+            onChange={(e) => {
+              handle(e);
+            }}
+          >
+            <option>--Gender--</option>
+            {radioValue.map((data, index) => (
+              <option key={index} value={data.value}>
+                {data.value}
+              </option>
+            ))}
+          </Form.Control>
+
+          <Form.Control
+            required
+            placeholder="Address"
+            className="input"
+            type="input"
+            id="address"
+            value={data.address}
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="Pincode"
+            className="input"
+            type="number"
+            id="pincode"
+            value={data.pincode}
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="Mobile No"
+            className="input"
+            type="number"
+            id="mobile"
+            value={data.mobile}
+            onChange={(e) => handle(e)}
+          />
+          <Form.Control
+            required
+            placeholder="Email"
+            className="input"
+            type="email"
+            id="email"
+            value={data.email}
+            onChange={(e) => handle(e)}
+          />
           <Link to="/teachers">
             <Button>Back</Button>
           </Link>

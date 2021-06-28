@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 function NewCourse() {
   const [data, setData] = useState({
     name: "",
-    noyear: "",
+    noYear: "",
+    totalPaper: "",
+    description: "",
   });
   //   form handler
 
@@ -25,7 +27,9 @@ function NewCourse() {
     axios
       .post(courseUrl, {
         name: data.name,
-        noyear: data.noyear,
+        noYear: data.noYear,
+        totalPaper: data.totalPaper,
+        description: data.description,
       })
       .then((res) => {
         console.log(res.data);
@@ -48,10 +52,10 @@ function NewCourse() {
           <Form.Control
             required
             as="select"
-            id="noyear"
+            id="noYear"
             className="input"
             type="text"
-            value={data.noyear}
+            value={data.noYear}
             placeholder="year"
             onChange={(e) => handle(e)}
           >
@@ -60,6 +64,22 @@ function NewCourse() {
             <option value="2 years">2 years</option>
             <option value="3 years">3 years</option>
           </Form.Control>
+          <FormControl
+            id="totalPaper"
+            className="input"
+            required
+            type="number"
+            placeholder="Total Paper"
+            onChange={(e) => handle(e)}
+          />
+          <FormControl
+            id="description"
+            className="input"
+            required
+            type="text"
+            placeholder="Description"
+            onChange={(e) => handle(e)}
+          />
           <Link to="/courses">
             <Button>Back</Button>
           </Link>

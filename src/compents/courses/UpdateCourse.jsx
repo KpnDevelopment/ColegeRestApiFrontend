@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 function UpdateCourse(props) {
   const [data, setData] = useState({
     name: "",
-    noyear: "",
+    noYear: "",
+    totalPaper: "",
+    description: "",
   });
 
   useEffect(() => {
@@ -33,7 +35,9 @@ function UpdateCourse(props) {
     axios
       .put(`http://localhost:5001/courses/${props.match.params.id}`, {
         name: data.name,
-        noyear: data.noyear,
+        noYear: data.noYear,
+        totalPaper: data.totalPaper,
+        description: data.description,
       })
       .then((result) => {
         console.log(result);
@@ -60,11 +64,11 @@ function UpdateCourse(props) {
           <FormControl
             required
             as="select"
-            id="noyear"
+            id="noYear"
             // className="input"
             // placeholder="year"
             // type="text"
-            value={data.noyear}
+            value={data.noYear}
             onChange={(e) => handle(e)}
           >
             {/* {console.log(data.noyear)} */}
@@ -73,6 +77,26 @@ function UpdateCourse(props) {
             <option value="2 years">2 years</option>
             <option value="3 years">3 years</option>
           </FormControl>
+          <FormControl
+            className="input"
+            required
+            id="totalPaper"
+            // defaultValue={data.name}
+            value={data.totalPaper}
+            type="text"
+            placeholder="Total paper"
+            onChange={(e) => handle(e)}
+          />
+          <FormControl
+            className="input"
+            required
+            id="description"
+            // defaultValue={data.name}
+            value={data.description}
+            type="text"
+            placeholder="Description"
+            onChange={(e) => handle(e)}
+          />
           <Link to="/courses">
             <Button>Back</Button>
           </Link>

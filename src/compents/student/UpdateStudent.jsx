@@ -19,6 +19,17 @@ function UpdateStudent(props) {
     mobile: "",
     email: "",
   });
+  const radioValue = [
+    {
+      value: "Female",
+    },
+    {
+      value: "Male",
+    },
+    {
+      value: "Other",
+    },
+  ];
   const [departmentList, setDepartmentList] = useState([]);
   useEffect(() => {
     // console.log(props.match.params.id);
@@ -141,26 +152,25 @@ function UpdateStudent(props) {
             value={data.sslcRegNo}
             onChange={(e) => handle(e)}
           />
-          <Form.Group as={Row}>
-            <Form.Label as="legend">Gender</Form.Label>
-            <Row style={{ display: "flex", flexDirection: "row" }}>
-              <Form.Check
-                type="radio"
-                label="Male"
-                value="Male"
-                name="formHorizontalRadios"
-                id="gender"
-                onChange={(e) => handle(e)}
-              />
-              <Form.Check
-                type="radio"
-                label="Female"
-                name="formHorizontalRadios"
-                id="gender"
-                onChange={(e) => handle(e)}
-              />
-            </Row>
-          </Form.Group>
+          <Form.Control
+            required
+            className="input"
+            as="select"
+            id="gender"
+            type="text"
+            value={data.gender}
+            placeholder="gender"
+            onChange={(e) => {
+              handle(e);
+            }}
+          >
+            <option>--Gender--</option>
+            {radioValue.map((data, index) => (
+              <option key={index} value={data.value}>
+                {data.value}
+              </option>
+            ))}
+          </Form.Control>
 
           <Form.Control
             required
