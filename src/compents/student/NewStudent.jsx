@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { studentsUrl, courseUrl } from "../../utils/url";
-import { RadioGroup, RadioButton } from "react-radio-buttons";
 import { Link } from "react-router-dom";
 
 function NewStudent() {
@@ -48,6 +47,7 @@ function NewStudent() {
     setData(newData);
     console.log(newData);
   }
+
   function submit(e) {
     e.preventDefault();
     axios

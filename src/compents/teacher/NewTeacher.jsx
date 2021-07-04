@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 function NewTeacher() {
   const [data, setData] = useState({
+    staffId: "",
     tname: "",
     department: "",
     yearOfJoin: "",
@@ -24,6 +25,9 @@ function NewTeacher() {
     fetchDepartmentList();
   }, []);
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
   const fetchDepartmentList = async () => {
     const response = await axios.get(courseUrl);
     console.log(response.data);
@@ -54,6 +58,7 @@ function NewTeacher() {
     e.preventDefault();
     axios
       .post(teachersUrl, {
+        staffId: data.staffId,
         tname: data.tname,
         department: data.department,
         yearOfJoin: data.yearOfAdm,
@@ -75,15 +80,22 @@ function NewTeacher() {
         console.log(err);
       });
   }
-  function refreshPage() {
-    window.location.reload(false);
-  }
+
   return (
     <div className="form">
       <Form size="lg" action="" onSubmit={(e) => submit(e)}>
         <h1>New Teacher</h1>
         <Form.Group>
-          <Form.Label>Name</Form.Label>
+          <Form.Control
+            required
+            className="input"
+            id="staffId"
+            type="Number"
+            value={data.staffId}
+            placeholder="Staff Id"
+            onChange={(e) => handle(e)}
+          />
+          {/* <Form.Label>Name</Form.Label> */}
           <Form.Control
             required
             className="input"

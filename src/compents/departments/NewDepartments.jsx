@@ -15,6 +15,10 @@ function NewDepartments() {
     fetchDepartmentList();
   }, []);
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+  //
   function handle(e) {
     const newData = { ...data };
     newData[e.target.id] = e.target.value;
@@ -37,6 +41,7 @@ function NewDepartments() {
       .then((res) => {
         // console.log(res.data);
         alert("created successfully");
+        refreshPage();
       });
   }
   return (

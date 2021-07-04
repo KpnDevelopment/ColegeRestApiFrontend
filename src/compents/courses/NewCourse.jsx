@@ -20,6 +20,9 @@ function NewCourse() {
 
     console.log(newData);
   }
+  function refreshPage() {
+    window.location.reload(false);
+  }
   //   submit
 
   function submit(e) {
@@ -34,6 +37,7 @@ function NewCourse() {
       .then((res) => {
         console.log(res.data);
         alert("created successfully");
+        refreshPage();
       });
   }
   return (

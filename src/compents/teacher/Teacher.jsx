@@ -44,6 +44,7 @@ function Teacher() {
       <Table striped bordered hover>
         <thead>
           <th>SlNo</th>
+          <th>StaffId</th>
           <th>Name</th>
           <th>department</th>
           <th>Year of Join</th>
@@ -66,6 +67,7 @@ function Teacher() {
           {teacher.map((data, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
+              <td>{data.staffId}</td>
               <td>{data.tname}</td>
               <td>{data.department}</td>
               <td>{data.yearOfJoin}</td>
