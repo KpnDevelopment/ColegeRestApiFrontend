@@ -1,16 +1,19 @@
 import React from "react";
+import Chart from "./Chart";
+import TopCards from "./TopCards";
 
 function Home() {
   return (
-    <div>
-      <h1>Home Page</h1>
-      <h1>Home Page</h1>
-      <h1>Home Page</h1>
-      <h1>Home Page</h1>
-      <h1>Home Page</h1>
-      <h1>Home Page</h1>
-      <h1>Home Page</h1>
-      <h1>Home Page</h1>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-around",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <TopCards />
+      <Chart />
     </div>
   );
 }

@@ -61,7 +61,7 @@ function Course() {
                     variant="danger"
                     onClick={() => {
                       axios
-                        .delete(`http://localhost:5001/courses/${data._id}`)
+                        .post(`http://localhost:5001/courses/${data._id}`)
                         .then((res) => {
                           // console.log(res);
                           alert("deleted");

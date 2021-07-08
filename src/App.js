@@ -20,7 +20,6 @@ import Home from "./compents/home/Home";
 import NavigationBar from "./compents/navigationbar/NavigationBar";
 import login from "./compents/login/Login";
 
-
 function App() {
   return (
     <Router>
